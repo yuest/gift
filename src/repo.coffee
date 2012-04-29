@@ -248,6 +248,7 @@ module.exports = class Repo
   # callback - Receives `(err)`.
   # 
   sync: (branch, callback) ->
+    [callback, branch] = [branch, []] if !callback
     @git "stash", {}, ["save"], (err) =>
       return callback err if err
       @git "pull", {}, branch, (err) =>
